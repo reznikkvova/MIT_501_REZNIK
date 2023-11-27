@@ -1,8 +1,21 @@
 # Клас "Item" представляє авто з параметрами: назва, рік, характеристики та ціна.
+module MyApplicationReznik
 
 class Item
     # Поля класу.
     attr_accessor :name, :year, :characteristics, :price
+
+     # Динамічні атрибути
+        def self.define_dynamic_attributes(field_names)
+          field_names.each do |field_name|
+            define_method(field_name) do
+              instance_variable_get("@#{field_name}")
+            end
+            define_method("#{field_name}=") do |value|
+              instance_variable_set("@#{field_name}", value)
+            end
+          end
+        end
   
     # Ініціалізує нове авто із заданими параметрами.
     #
@@ -10,6 +23,7 @@ class Item
     # @param year [Integer] Рік виробництва авто.
     # @param characteristics [String] Характеристики авто.
     # @param price [Float] Ціна авто.
+
     def initialize(name, year, characteristics, price)
       @name = name
       @year = year
@@ -46,5 +60,9 @@ class Item
         price: @price
       }
     end
+    def <=>(other)
+          self.name <=> other.name
+        end
+      end
   end
   

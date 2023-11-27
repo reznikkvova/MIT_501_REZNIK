@@ -10,6 +10,8 @@
 require './Parser.rb'
 require './main_application.rb'
 require './cart.rb'
+require './engine.rb'
+require './my_application_reznikk.rb'
 
 # Задання шляху для зберігання даних та налаштувань фільтрації.
 data_storage_path = './files/'
@@ -46,3 +48,8 @@ cart.search_item('Volkswagen')
 cart.save_to_file('test.txt')
 cart.save_to_json('test.json')
 cart.save_to_csv('test.csv')
+cart.save_to_yml('test.yml')
+
+engine_instance = MyApplicationReznik::Engine.new()
+my_app_instance = MyApplicationReznik::MyApplicationReznikk.instance
+engine_instance.run_application(app, my_app_instance)

@@ -1,5 +1,7 @@
 # Клас "Cart" представляє місце для зберігання авто та виконання операцій збереження даних.
 
+module MyApplicationReznik
+
 require './item_container.rb'
 
 class Cart
@@ -45,4 +47,22 @@ class Cart
       end
     end
   end
+
+  def save_to_yml(filename)
+      File.open(@path + filename, 'w') do |file|
+        data_to_save = {
+          'items' => @items.map do |item|
+            {
+              'Model' => item.name,
+              'Year' => item.year,
+              'Characteristics' => item.characteristics,
+              'Price' => item.price
+            }
+          end
+        }
+        file.puts data_to_save.to_yaml
+      end
+    end
+  end
+
 end
