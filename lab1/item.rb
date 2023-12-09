@@ -62,7 +62,7 @@ class Item
     end
     def <=>(other)
           self.name <=> other.name
-        end
-      end
+    end
   end
+end
   
